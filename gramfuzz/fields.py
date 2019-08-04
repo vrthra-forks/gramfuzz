@@ -323,7 +323,7 @@ class String(UInt):
     """Alpha-numeric character set (upper- and lower-case alphabet + numbers)
     """
 
-    charset_all = "".join(chr(x) for x in xrange(0x100))
+    charset_all = "".join(chr(x) for x in range(0x100))
     """All possible binary characters (``0x0-0xff``)
     """
 
