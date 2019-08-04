@@ -125,7 +125,7 @@ class GramFuzzer(object):
         code = compile(data, path, "exec")
 
         locals_ = {"GRAMFUZZER": self, "__file__": path}
-        exec code in locals_
+        exec(code, locals_)
 
         if "TOP_CAT" in locals_:
             cat_group = os.path.basename(path).replace(".py", "")
@@ -158,7 +158,7 @@ class GramFuzzer(object):
         # first find all rule definitions that *don't* have
         # any references - these are the leaf nodes
         for cat in self.defs.keys():
-            for rule_name, rules in self.defs.get(cat, {}).iteritems():
+            for rule_name, rules in self.defs.get(cat, {}).items():
                 for rule in rules:
                     refs = self._collect_refs(rule)
                     if len(refs) == 0:
@@ -481,7 +481,7 @@ class GramFuzzer(object):
 
             # else just choose a key at random from the category
             else:
-                rand_key = _choice(keys)
+                rand_key = _choice(list(keys))
 
             # pruning failed, this rule is not defined/reachable
             if rand_key not in cat_defs:
